@@ -67,11 +67,13 @@ public class DAO_Pessoa implements IDAO_Pessoa<Pessoa>{
             pst.setString(4, p.getTipo());
             
             pst.execute();
+            FacesUtil.MensagemIformativa("Usuário foi atualizado com sucesso!");
             pst.close();
             ConexaoBD.Desconectar();
             
         }catch (SQLException a) {
             a.printStackTrace();
+            FacesUtil.MensagemErro("Não foi possível atualizar o usuário!");
         } 
         
     }
@@ -92,10 +94,12 @@ public class DAO_Pessoa implements IDAO_Pessoa<Pessoa>{
             pst.setInt(1, p.getId());
             
             pst.execute();
+            FacesUtil.MensagemIformativa("O usuário foi deletado com sucesso!");
             pst.close();
             ConexaoBD.Desconectar();
         }catch (SQLException a) {
             a.printStackTrace();
+            FacesUtil.MensagemErro("Não foi possível deletar o usuário!");
         } 
     }
     
@@ -119,6 +123,7 @@ public class DAO_Pessoa implements IDAO_Pessoa<Pessoa>{
           
         }catch (SQLException a){
             a.printStackTrace();
+            FacesUtil.MensagemErro("Não foi possível listar os  usuários!");
             return null;
         }
     }

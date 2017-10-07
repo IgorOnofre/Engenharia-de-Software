@@ -2,6 +2,7 @@ package br.com.reserva.upe.dao;
 
 import br.com.reserva.upe.conexao.ConexaoBD;
 import br.com.reserva.upe.modelo.Reserva;
+import br.com.reserva.upe.util.FacesUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,11 +41,13 @@ public class DAO_Reserva implements IDAO_Reserva<Reserva>{
             
             
             pst.execute();
+            FacesUtil.MensagemIformativa("A nova reserva efetuada com sucesso!");
             pst.close();
             ConexaoBD.Desconectar();
             
         }catch (SQLException a) {
             a.printStackTrace();
+            FacesUtil.MensagemErro("Não foi possível salvar a reserva! :/");
         } 
     }
     
@@ -68,11 +71,13 @@ public class DAO_Reserva implements IDAO_Reserva<Reserva>{
             pst.setString(3, r.getHorario());                    
             
             pst.execute();
+            FacesUtil.MensagemIformativa("A reserva atualizada com sucesso!");
             pst.close();
             ConexaoBD.Desconectar();
             
         }catch (SQLException a) {
             a.printStackTrace();
+            FacesUtil.MensagemErro("Não foi possível atualizar a reserva! :/");
         } 
         
     }
@@ -94,10 +99,12 @@ public class DAO_Reserva implements IDAO_Reserva<Reserva>{
             pst.setInt(1, r.getId());
             
             pst.execute();
+            FacesUtil.MensagemIformativa("A reserva foi cancelada com sucesso!");
             pst.close();
             ConexaoBD.Desconectar();
         }catch (SQLException a) {
             a.printStackTrace();
+            FacesUtil.MensagemErro("Não foi possível cancelar a reserva! :/");
         } 
     }
     
@@ -121,6 +128,7 @@ public class DAO_Reserva implements IDAO_Reserva<Reserva>{
           
         }catch (SQLException a){
             a.printStackTrace();
+            FacesUtil.MensagemErro("Não foi possível listar as reservas! :/");
             return null;
         }
 }

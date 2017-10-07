@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -35,21 +36,23 @@
     <!-- NAVBAR
     ================================================== -->
     <h:body>
+        <p:growl id="MenssagemGenerica"/>
         <div class="navbar-wrapper">
             <div class="container">
                 <div>
                     <h:form class="form-signin" id="form">
                         <h2 class="form-group">Por favor, insira os dados requisitados</h2>
-                        
-<!--                        <h4 class="form-group">Data</h4>
+
+                     <!--<h4 class="form-group">Data</h4>
                         <div class="input-group date" data-provide="datepicker">
-                            <h:inputText value="#{reservaN.dataDaReserva}" styleClass="datepicker" class="form-control" required ="autofocus">
+                            <h:inputText id="data" value="#{reservaN.dataDaReserva}" styleClass="datepicker" class="form-control" required ="autofocus">
                                 <f:passThroughAttribute name="placeholder" value="Selecione a data" />
                             </h:inputText>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </div>
                         </div>-->
+                        
 
                         <h4 class="form-group">Turno</h4>
                         <h:selectOneMenu class="form-control" value="#{reservaN.turno}" id="turno" required = "autofocus">
@@ -61,7 +64,7 @@
 
                         <h4 class="form-group">Laboratório</h4>
                         <h:selectOneMenu class="form-control" value="#{reservaN.laboratorio}" id="laboratorio" required = "autofocus">
-                      
+
                             <f:selectItem itemValue="Selecione o laboratório" noSelectionOption="true"/>
                             <f:selectItem itemValue="Lab1" itemLabel="Lab1"/> 
                             <f:selectItem itemValue="Lab2" itemLabel="Lab2"/>
@@ -74,8 +77,8 @@
 
                         <h4 class="form-group">Aulas</h4>
                         <h:selectOneMenu class="form-control" value="#{reservaN.horario}" id="aulas" required = "autofocus">
-                            
-                           <f:selectItem itemValue="Selecione as aulas" noSelectionOption="true"/>
+
+                            <f:selectItem itemValue="Selecione as aulas" noSelectionOption="true"/>
                             <f:selectItem itemValue="Apenas uma aula" itemLabel="Apenas uma aulas"/> 
                             <f:selectItem itemValue="Duas aulas" itemLabel="Duas aulas"/>
                             <f:selectItem itemValue="Três aulas" itemLabel="Três aulas"/>
@@ -87,7 +90,7 @@
 
                         <h4 class="form-group">Descrição</h4>
                         <h:selectOneMenu class="form-control" value="#{reservaN.descricao}" id="descricao" required = "autofocus">
-                         
+
                             <f:selectItem itemValue="Selecione a descrição" noSelectionOption="true"/>
                             <f:selectItem itemValue="Aula" itemLabel="Aula"/> 
                             <f:selectItem itemValue="Estudo em grupo" itemLabel="Estudo em grupo"/>
@@ -100,11 +103,11 @@
                         </h:selectOneMenu>
 
                         <br/>
-                        <h:commandLink id="submit" type="submit" actionListener="#{reservaNormal.salvarReserva(reservaN, conferePessoa.pessoaLogada.id)}"
-                            styleClass="btn btn-lg btn-success btn-block">
-                            <i class="glyphicon glyphicon-share-alt"></i> Enviar
-                        </h:commandLink>
-                        
+                        <p:commandLink id="submit" type="submit" action="#{reservaNormal.salvarReserva(reservaN, conferePessoa.pessoaLogada.id)}"
+                                       update=":MenssagemGenerica" styleClass="btn btn-lg btn-success btn-block">
+                            Enviar
+                        </p:commandLink>
+
                         <footer>
                             <center><br/><p>&copy; 2017 Hilton, Igor, Iara, Matheus, Vínicius &middot; <a href="#">Privacidade</a> &middot; <a href="#">Termos</a></p></center>
                         </footer>
@@ -118,16 +121,6 @@
             <!-- Bootstrap core JavaScript
             ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
-            <script type="text/javascript">
-                $('#data').datepicker({
-                    format: 'dd/mm/yyyy'
-                            language:"pt-BR",
-                            startDate: '+0d'});
-            </script>
-
-            <script type="text/javascript">
-                $('.selectpicker').selectpicker();
-            </script>
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <!--<script>window.jQuery || document.write('<script src="./resources/js/jquery.min.js"><\/script>');</script>-->
