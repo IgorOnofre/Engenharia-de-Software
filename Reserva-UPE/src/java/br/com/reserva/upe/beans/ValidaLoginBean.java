@@ -21,13 +21,8 @@ public class ValidaLoginBean implements Serializable{
         DAO_Pessoa dao = new DAO_Pessoa();
         Pessoa logado = dao.autenticar(p);
 
-        if (logado.getNome().equals("")) {
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("erro.xhtml");
-            } catch (IOException ex) {
-                Logger.getLogger(ValidaLoginBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
+        if (!logado.getNome().equals("")) {
+            
             if (p.getTipo().equals("1")) {
                 pessoaLogada = logado;
                 try {
@@ -35,14 +30,25 @@ public class ValidaLoginBean implements Serializable{
                 } catch (IOException ex) {
                     Logger.getLogger(ValidaLoginBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
+            }
+            
+            if (p.getTipo().equals("2"))  {
                 pessoaLogada = logado;
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("homeAdm2.xhtml");
                 } catch (IOException ex) {
                     Logger.getLogger(ValidaLoginBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }    
+            }
+            
+        } else {
+            
+             try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("erro.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(ValidaLoginBean.class.getName()).log(Level.SEVERE, null, ex);
+            }  
+             
         }
     }
 
