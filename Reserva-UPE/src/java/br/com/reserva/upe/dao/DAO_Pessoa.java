@@ -7,11 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAO_Pessoa implements IDAO_Pessoa<Pessoa>{
 
     ConexaoBD conect = new ConexaoBD();
-    Pessoa pessoa = new Pessoa();
+   
     
     
     /**
@@ -103,22 +105,40 @@ public class DAO_Pessoa implements IDAO_Pessoa<Pessoa>{
         } 
     }
     
-    public ResultSet Listar(Pessoa p){
-        String sql= "SELECT nome, email FROM pessoa WHERE nome like '?%' order by nome Asc;";
+    public List<Pessoa> Listar(String p){
+        String sql= "SELECT nome, email FROM pessoa WHERE nome like '"+p+"%' order by nome Asc;";
+        List<Pessoa> lista = new ArrayList<Pessoa>();
         
         try{
             Connection conn = ConexaoBD.Conectar();
             PreparedStatement pst;
             ResultSet rs;
             
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, p.getNome());
-            
+            pst = conn.prepareStatement(sql);                    
             rs = pst.executeQuery(sql);
+            
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String Nome = rs.getString("Nome");
+                String Email = rs.getString("email");              
+                String Tipo = rs.getString("Tipo");
+               
+                Pessoa pe = new Pessoa();
+                
+                pe.setId(id);
+                pe.setNome(Nome);
+                pe.setEmail(Email);
+                pe.setTipo(Tipo);
+               
+
+                lista.add(pe);
+            }
+
+            
             pst.close();
             ConexaoBD.Desconectar();
             
-            return rs;
+            return lista;
             
           
         }catch (SQLException a){

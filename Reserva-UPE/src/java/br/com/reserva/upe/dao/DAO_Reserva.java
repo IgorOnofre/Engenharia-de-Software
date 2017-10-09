@@ -4,9 +4,12 @@ import br.com.reserva.upe.conexao.ConexaoBD;
 import br.com.reserva.upe.modelo.Reserva;
 import br.com.reserva.upe.util.FacesUtil;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,7 +18,7 @@ import java.sql.SQLException;
 public class DAO_Reserva implements IDAO_Reserva<Reserva>{
     
     ConexaoBD conect = new ConexaoBD();
-    Reserva pessoa = new Reserva();
+   
     
     /**
      *
@@ -108,22 +111,44 @@ public class DAO_Reserva implements IDAO_Reserva<Reserva>{
         } 
     }
     
-    public ResultSet Listar(Reserva r){
-        String sql= "SELECT dataDaReserva, turno, horario FROM reserva WHERE dataDaReserva like '?%' order by nome Asc;";
-        
+    public List<Reserva> Listar(String r){
+        String sql= "SELECT dataDaReserva, turno, horario FROM reserva WHERE dataDaReserva like '"+r+"%' order by nome Asc;";
+        List<Reserva> lista = new ArrayList<Reserva>();
         try{
             Connection conn = ConexaoBD.Conectar();
             PreparedStatement pst;
             ResultSet rs;
             
             pst = conn.prepareStatement(sql);
-            pst.setDate(1, r.getDataDaReserva());
-            
             rs = pst.executeQuery(sql);
+            
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int idPessoa = rs.getInt("idPessoa");
+                Date dataDaReserva = rs.getDate("dataDaReserva");
+                String Turno = rs.getString("turno");
+                String Horario = rs.getString("horario");
+                String Laboratorio = rs.getString("laboratorio");
+                String Descricao = rs.getString("descricao");
+               
+                Reserva re = new Reserva();
+                
+                re.setId(id);
+                re.setIdPessoa(idPessoa);
+                re.setDataDaReserva(dataDaReserva);
+                re.setTurno(Turno);
+                re.setHorario(Horario);
+                re.setLaboratorio(Laboratorio);
+                re.setDataDaReserva(dataDaReserva);
+                
+
+                lista.add(re);
+            }
+            
             pst.close();
             ConexaoBD.Desconectar();
             
-            return rs;
+            return lista;
             
           
         }catch (SQLException a){
