@@ -7,14 +7,11 @@ package br.com.reserva.upe.beans;
 
 import br.com.reserva.upe.dao.DAO_Reserva;
 import br.com.reserva.upe.modelo.Reserva;
-import java.io.IOException;
+import br.com.reserva.upe.util.FacesUtil;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -34,13 +31,13 @@ public class ReservaNormalBean implements Serializable{
         try {
             dao.Cadastrar(r);
             novaReserva = r;
-            FacesContext.getCurrentInstance().getExternalContext().redirect("reservaNormalDeuCerto.xhtml");
+            FacesUtil.MensagemIformativa("A nova reserva foi efetuada com sucesso!");
+            
                     
         } catch (SQLException ex) {
             System.out.println("Erro de SQL: " + ex);
-        } catch (IOException ex) {
-            System.out.println("Erro de IO: " + ex);
-            Logger.getLogger(ReservaNormalBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesUtil.MensagemErro("Não foi possível salvar a reserva! :/");
+            
         }
         
     }

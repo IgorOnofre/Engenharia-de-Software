@@ -43,16 +43,16 @@
                     <h:form class="form-signin" id="form">
                         <h2 class="form-group">Por favor, insira os dados requisitados</h2>
 
-                     <!--<h4 class="form-group">Data</h4>
-                        <div class="input-group date" data-provide="datepicker">
-                            <h:inputText id="data" value="#{reservaN.dataDaReserva}" styleClass="datepicker" class="form-control" required ="autofocus">
-                                <f:passThroughAttribute name="placeholder" value="Selecione a data" />
-                            </h:inputText>
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </div>
-                        </div>-->
-                        
+                        <!--<h4 class="form-group">Data</h4>
+                           <div class="input-group date" data-provide="datepicker">
+                               <h:inputText id="data" value="#{reservaN.dataDaReserva}" styleClass="datepicker" class="form-control" required ="autofocus">
+                                   <f:passThroughAttribute name="placeholder" value="Selecione a data" />
+                               </h:inputText>
+                               <div class="input-group-addon">
+                                   <span class="glyphicon glyphicon-calendar"></span>
+                               </div>
+                           </div>-->
+
 
                         <h4 class="form-group">Turno</h4>
                         <h:selectOneMenu class="form-control" value="#{reservaN.turno}" id="turno" required = "autofocus">
@@ -105,7 +105,8 @@
                         <br/>
                         <p:commandLink id="submit" type="submit" action="#{reservaNormal.salvarReserva(reservaN, conferePessoa.pessoaLogada.id)}"
                                        update=":MenssagemGenerica" styleClass="btn btn-lg btn-success btn-block">
-                            Enviar
+                                       <i class="glyphicon glyphicon-floppy-disk"></i>
+                            Salvar
                         </p:commandLink>
 
                         <footer>

@@ -5,7 +5,6 @@
  */
 package br.com.reserva.upe.beans;
 
-import br.com.reserva.upe.modelo.Pessoa;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

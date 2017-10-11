@@ -2,6 +2,7 @@ package br.com.reserva.upe.beans;
 
 import br.com.reserva.upe.dao.DAO_Pessoa;
 import br.com.reserva.upe.modelo.Pessoa;
+import br.com.reserva.upe.util.FacesUtil;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -39,15 +40,7 @@ public class ValidaLoginBean implements Serializable{
                 } catch (IOException ex) {
                     Logger.getLogger(ValidaLoginBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-            
-        } else {
-            
-             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("erro.xhtml");
-            } catch (IOException ex) {
-                Logger.getLogger(ValidaLoginBean.class.getName()).log(Level.SEVERE, null, ex);
-            }  
+            }     
              
         }
     }

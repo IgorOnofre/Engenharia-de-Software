@@ -104,7 +104,6 @@ public class DAO_Pessoa implements IDAO_Pessoa<Pessoa>{
             FacesUtil.MensagemErro("Não foi possível deletar o usuário!");
         } 
     }
-    
     public List<Pessoa> Listar(String p){
         String sql= "SELECT nome, email FROM pessoa WHERE nome like '"+p+"%' order by nome Asc;";
         List<Pessoa> lista = new ArrayList<Pessoa>();
@@ -167,6 +166,7 @@ public class DAO_Pessoa implements IDAO_Pessoa<Pessoa>{
                 p.setNome(rs.getString("nome"));
             }else{
                 p.setNome("");
+                FacesUtil.MensagemErro("Usuário ou senha incorretas!");
             }
             
             pst.close();

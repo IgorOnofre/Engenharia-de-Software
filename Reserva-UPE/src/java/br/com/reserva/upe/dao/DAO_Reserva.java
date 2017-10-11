@@ -44,13 +44,12 @@ public class DAO_Reserva implements IDAO_Reserva<Reserva>{
             
             
             pst.execute();
-            FacesUtil.MensagemIformativa("A nova reserva efetuada com sucesso!");
             pst.close();
             ConexaoBD.Desconectar();
             
         }catch (SQLException a) {
             a.printStackTrace();
-            FacesUtil.MensagemErro("Não foi possível salvar a reserva! :/");
+            
         } 
     }
     
